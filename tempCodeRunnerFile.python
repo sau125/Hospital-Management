@@ -1,0 +1,25 @@
+def result(arr,n,i,b):
+    if n<2:
+        return 0
+    if i>n-1:
+        return 0
+    if b==-1:
+        b=arr[i]
+        return result(arr,n,i+1,b)
+    else:
+        if arr[i]>b:
+            temp=arr[i]-b
+            ans=max(temp+result(arr,n,i+1,-1),result(arr,n,i+1,b))
+            return ans
+
+n=7
+arr=[100, 180, 260, 310, 40, 535, 695]
+i=0
+b=-1
+print(result(arr,n,i,b))
+        
+
+    
+    
+
+
