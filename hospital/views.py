@@ -87,7 +87,7 @@ def patient_signup_view(request):
             user.save()
             patient=patientForm.save(commit=False)
             patient.user=user
-            patient.assignedDoctorId=request.POST.get('assignedDoctorId')
+            #patient.assignedDoctorId=request.POST.get('assignedDoctorId')
             patient=patient.save()
             my_patient_group = Group.objects.get_or_create(name='PATIENT')
             my_patient_group[0].user_set.add(user)
@@ -109,7 +109,7 @@ def is_patient(user):
 
 
 
-#---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,DOCTOR OR PATIENT
+#---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF DOCTOR OR PATIENT
 def afterlogin_view(request):
     # if is_admin(request.user):
     #     return redirect('homebase')
@@ -682,14 +682,14 @@ def doctor_patient_view(request):
 @user_passes_test(is_patient)
 def patient_dashboard_view(request):
     patient=models.Patient.objects.get(user_id=request.user.id)
-    doctor=models.Doctor.objects.get(user_id=patient.assignedDoctorId)
+    # doctor=models.Doctor.objects.get(user_id=patient.assignedDoctorId)
     mydict={
     'patient':patient,
-    'doctorName':doctor.get_name,
-    'doctorMobile':doctor.mobile,
-    'doctorAddress':doctor.address,
+    # 'doctorName':doctor.get_name,
+    # 'doctorMobile':doctor.mobile,
+    # 'doctorAddress':doctor.address,
     'symptoms':patient.symptoms,
-    'doctorDepartment':doctor.department,
+    # 'doctorDepartment':doctor.department,
     'admitDate':patient.admitDate,
     }
     return render(request,'hospital/patient_dashboard.html',context=mydict)
@@ -788,16 +788,18 @@ def aboutus_view(request):
     return render(request,'hospital/aboutus.html')
 
 def contactus_view(request):
-    sub = forms.ContactusForm()
-    if request.method == 'POST':
-        sub = forms.ContactusForm(request.POST)
-        if sub.is_valid():
-            email = sub.cleaned_data['Email']
-            name=sub.cleaned_data['Name']
-            message = sub.cleaned_data['Message']
-            send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
-            return render(request, 'hospital/contactussuccess.html')
-    return render(request, 'hospital/contactus.html', {'form':sub})
+    return render(request,'hospital/contactus.html')
+# def contactus_view(request):
+#     sub = forms.ContactusForm()
+#     if request.method == 'POST':
+#         sub = forms.ContactusForm(request.POST)
+#         if sub.is_valid():
+#             email = sub.cleaned_data['Email']
+#             name=sub.cleaned_data['Name']
+#             message = sub.cleaned_data['Message']
+#             send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
+#             return render(request, 'hospital/contactussuccess.html')
+#     return render(request, 'hospital/contactus.html', {'form':sub})
 
 
 #---------------------------------------------------------------------------------

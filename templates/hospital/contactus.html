@@ -16,20 +16,15 @@
   <br><br>
 
   <center>
-    <h3 class='alert alert-success'>Send Us Your Valuable Feedback !</h3>
+    <h3 class='alert alert-success'>Let's Talk</h3>
+  <br>
+  <br>
+  <br>
+  <br>
 
-    <form method="POST">
-      <!-- Very Important csrf Token -->
-      {% csrf_token %}
-      <div class="form-group">
-        <p>
-        <h3>{{ form.as_p }}</h3>
-        </p>
-        <br>
-        <input type="submit" value="Send Message" class='btn btn-primary btn-lg'>
-      </div>
-    </form>
+  <h4> Share your valuable feedback with us.</h4>
+  <h4><u>shuklasaurabh67@gmail.com</u></h4>
   </center>
-
+   {% include "hospital/footer.html" %}
 </body>
 </html>
