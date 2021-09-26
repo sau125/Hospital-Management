@@ -1,13 +1,13 @@
 
 
 
-
-
+from django.conf import settings
+from django.views.static import serve
 from django.contrib import admin
 from django.urls import path
 from hospital import views
 from django.contrib.auth.views import LoginView,LogoutView
-
+from django.conf.urls import url
 
 #-------------FOR ADMIN RELATED URLS
 urlpatterns = [
@@ -17,7 +17,8 @@ urlpatterns = [
 
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),
-
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 
     # path('adminclick', views.adminclick_view),
     path('doctorclick', views.doctorclick_view),
