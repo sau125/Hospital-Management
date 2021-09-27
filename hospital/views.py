@@ -16,7 +16,7 @@ def home_view(request):
 
 
 
-#for showing signup/login button for doctor
+#for showing signup/login button for docto
 def doctorclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
