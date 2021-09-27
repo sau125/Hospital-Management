@@ -1,0 +1,1 @@
+web: gunicorn HMSUD.wsgi --log-file -
