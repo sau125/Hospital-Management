@@ -1,1 +1,1 @@
-web: gunicorn HMSUD.wsgi --log-file -
+web: gunicorn hospitalmanagement.wsgi --log-file -
